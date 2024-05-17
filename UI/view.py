@@ -13,7 +13,8 @@ class View(ft.UserControl):
         self._controller = None
         # graphical elements
         self._title = None
-
+        self._ddNearby = None
+        self._btn_connected = None
         self._txt_result = None
 
     def load_interface(self):
@@ -27,8 +28,13 @@ class View(ft.UserControl):
         row1 = ft.Row([self._txtAnno, self._btnCalcola], alignment=ft.MainAxisAlignment.CENTER)
         self._page.controls.append(row1)
         # List View where the reply is printed
+        self._ddNearby = ft.Dropdown(options=[], label="Stato")
+        self._btn_connected = ft.ElevatedButton(text="Stati raggiungibili", on_click=self._controller.handleConnected, disabled=True)
         self._txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
+        row2 = ft.Row([self._ddNearby, self._btn_connected], alignment=ft.MainAxisAlignment.CENTER)
+        self._page.controls.append(row2)
         self._page.controls.append(self._txt_result)
+        self._controller.riempi_dropdown()
         self._page.update()
 
     @property
