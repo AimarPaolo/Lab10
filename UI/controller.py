@@ -12,6 +12,7 @@ class Controller:
 
     def handleCalcola(self, e):
         self._view._btn_connected.disabled = False
+        self._view._btn_cerca_vicini.disabled = False
         self._view._txt_result.controls.clear()
         anno = self._view._txtAnno.value
         if anno == "" or int(anno) <= 1816 or int(anno) >= 2016 :
@@ -42,6 +43,23 @@ class Controller:
             return
         for nodi in nodiConnessi:
             self._view._txt_result.controls.append(ft.Text(f"Lo stato cercato è connesso a: {nodi.StateNme}"))
+        self._view.update_page()
+
+    def handleCercaVicini(self, e):
+        self._view._txt_result.controls.clear()
+        nodoStarter = self._view._ddNearby.value
+        vicini = self._model.getConfinanti(nodoStarter)
+        print(vicini)
+        if nodoStarter == "":
+            self._view._txt_result.controls.append(ft.Text("Non è stata selezionata nessuna scelta!!", color="red"))
+            self._view.update_page()
+            return
+        if len(vicini) == 0:
+            self._view._txt_result.controls.append(ft.Text(f"Lo stato cercato non è connesso a nulla"))
+            self._view.update_page()
+            return
+        for nodi in vicini:
+            self._view._txt_result.controls.append(ft.Text(f"Lo stato cercato è confinante con: {nodi.StateNme}"))
         self._view.update_page()
 
     def riempi_dropdown(self):

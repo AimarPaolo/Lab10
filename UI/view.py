@@ -16,6 +16,7 @@ class View(ft.UserControl):
         self._ddNearby = None
         self._btn_connected = None
         self._txt_result = None
+        self._txt_cerca_vicini = None
 
     def load_interface(self):
         # title
@@ -31,7 +32,8 @@ class View(ft.UserControl):
         self._ddNearby = ft.Dropdown(options=[], label="Stato")
         self._btn_connected = ft.ElevatedButton(text="Stati raggiungibili", on_click=self._controller.handleConnected, disabled=True)
         self._txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
-        row2 = ft.Row([self._ddNearby, self._btn_connected], alignment=ft.MainAxisAlignment.CENTER)
+        self._btn_cerca_vicini = ft.ElevatedButton(text="Cerca Vicini", disabled=True, on_click=self._controller.handleCercaVicini)
+        row2 = ft.Row([self._ddNearby, self._btn_connected, self._btn_cerca_vicini], alignment=ft.MainAxisAlignment.CENTER)
         self._page.controls.append(row2)
         self._page.controls.append(self._txt_result)
         self._controller.riempi_dropdown()

@@ -49,6 +49,10 @@ class Model:
     def getConnessi(self):
         return nx.number_connected_components(self._grafo)
 
+    def getConfinanti(self, nodoIniziale):
+        nodo = self._idMap[int(nodoIniziale)]
+        return list(self._grafo.neighbors(nodo))
+
     def getNodiConnessi(self, nodoIniziale):
         nodo = self._idMap[int(nodoIniziale)]
         return nx.dfs_predecessors(self._grafo, nodo)
