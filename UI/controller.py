@@ -49,7 +49,6 @@ class Controller:
         self._view._txt_result.controls.clear()
         nodoStarter = self._view._ddNearby.value
         vicini = self._model.getConfinanti(nodoStarter)
-        print(vicini)
         if nodoStarter == "":
             self._view._txt_result.controls.append(ft.Text("Non è stata selezionata nessuna scelta!!", color="red"))
             self._view.update_page()
